@@ -1,6 +1,7 @@
 def max_average(nums, k):
+    #create a method to find subarray
     def can_find_subarray(mid):
-        # Subtract mid from each element and check for a valid subarray sum
+        
         prefix_sum = [0] * (len(nums) + 1)
         for i in range(1, len(nums) + 1):
             prefix_sum[i] = prefix_sum[i - 1] + nums[i - 1] - mid
@@ -12,7 +13,7 @@ def max_average(nums, k):
             min_prefix_sum = min(min_prefix_sum, prefix_sum[i - k + 1])
         
         return False
-
+#finding high and low value of a subarray
     low, high = min(nums), max(nums)
     epsilon = 1e-5
     
@@ -24,7 +25,7 @@ def max_average(nums, k):
             high = mid
             
     return low
-
+#this is an example of given array
 nums = [1, 12, -5, -6, 50, 3]
 k = 4
 result = max_average(nums, k)

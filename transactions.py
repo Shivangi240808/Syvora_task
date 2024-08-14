@@ -1,7 +1,7 @@
 class DebtManager:
     def __init__(self):
         self.debts = {}
-
+#Process Transactions:
     def add_transaction(self, debtor, creditor, amount):
         if debtor not in self.debts:
             self.debts[debtor] = {}
@@ -9,23 +9,22 @@ class DebtManager:
             self.debts[debtor][creditor] = 0
         self.debts[debtor][creditor] += amount
         
-        # Debugging: Print the current state of debts
         print(f"Transaction added: {debtor} owes {creditor} {amount}")
         print(f"Current debts: {self.debts}")
-
+#Query Debt Owed by Person:
     def query_debt(self, person):
         total_debt = 0
         if person in self.debts:
             total_debt = sum(self.debts[person].values())
         return total_debt
-
+#Query Money Owed to Person:
     def query_money_owed(self, person):
         total_money_owed = 0
         for debtor in self.debts:
             if person in self.debts[debtor]:
                 total_money_owed += self.debts[debtor][person]
         return total_money_owed
-
+#Query Person with Most Money Owed:
     def query_most_money_owed(self):
         max_money_owed = 0
         person_max_money_owed = None
@@ -35,7 +34,7 @@ class DebtManager:
                 max_money_owed = money_owed
                 person_max_money_owed = person
         return person_max_money_owed, max_money_owed
-
+#Query Person with Most Debt:
     def query_most_debt(self):
         max_debt = 0
         person_max_debt = None
@@ -46,14 +45,12 @@ class DebtManager:
                 person_max_debt = person
         return person_max_debt, max_debt
 
-    # Ensure the run method is within the class
     def run(self):
         while True:
             command = input("Enter command: ").strip().split()
             if not command:
                 continue
-            
-            # Check for the correct number of arguments based on the command
+#Command Line Interface: Using CLI, we are taking command from the user as an input to take all the details realted to transactions        
             if command[0] == "add_transaction":
                 if len(command) != 4:
                     print("Error: add_transaction requires 3 arguments (debtor, creditor, amount).")
@@ -80,7 +77,6 @@ class DebtManager:
             else:
                 print("Unknown command!")
 
-# Example Usage
 if __name__ == "__main__":
     manager = DebtManager()
     manager.run()
